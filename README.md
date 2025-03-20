@@ -66,10 +66,47 @@ Currently, two official plugins are available:
 - `npm i -D nodemon`
 - `npm i mongoose`
 - `npm create vite@latest`
+- `npm install concurrently --save-dev`
 
 # 🛠️ Progress
 
 ### ✨⚙️ Setup **Complete**
+
+- Add to the root of the project folder.
+```json
+"scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+  },
+  ```
+
+  ```bash
+  $ npm run dev
+
+> dev
+> concurrently "npm run dev --prefix client" "npm run dev --prefix server"
+
+[1] 
+[1] > dev
+[1] > nodemon server.js
+[1]
+[0]
+[0] > weather-client@0.0.0 dev
+[0] > vite
+[0]
+[1] [nodemon] 3.1.9
+[1] [nodemon] to restart at any time, enter `rs`
+[1] [nodemon] watching path(s): *.*
+[1] [nodemon] watching extensions: js,mjs,cjs,json
+[1] [nodemon] starting `node server.js`
+[0]
+[0]   VITE v6.2.2  ready in 104 ms
+[0]
+[0]   ➜  Local:   http://localhost:5173/
+[0]   ➜  Network: use --host to expose
+[1] Server is running on port: 3000
+[1] Connected to MongoDB successfully: 127.0.0.1.
+[1] GET /api/v1/weather 304 5.502 ms - -
+```
 
 - [x] Set up **client-side**.
 - [x] Set up **server-side**.
