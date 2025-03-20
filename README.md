@@ -2,11 +2,11 @@
 
 [![Development Tools](https://skillicons.dev/icons?i=vscode,windows,apple,github)](https://skillicons.dev)
 
-[![Deployment Status](https://api.netlify.com/api/v1/badges/0c441339-e78e-4bb9-a361-96447a47f986/deploy-status)](https://app.netlify.com/sites/portfolio-2025-hunterstevenshaw/deploys)
+[![Development Status](https://api.netlify.com/api/v1/badges/6f73d827-fc3a-4e3c-9805-0f9b063a117a/deploy-status)](https://app.netlify.com/sites/hunterstevenshaw-weatherapp/deploys)
 
 **🌐 [https://github.com/Kasador/OpenWeatherMap.git](https://github.com/Kasador/OpenWeatherMap.git)**
 
-### 🔗🚧 **Development Server**: [https://YOURDEVSERVER.netlify.app/](https://en-es-dictionary.netlify.app/)
+### 🔗🚧 **Development Server**: [https://hunterstevenshaw-weatherapp.netlify.app/](https://hunterstevenshaw-weatherapp.netlify.app/)
 
 ## 🖥️ The Weather App
 
@@ -38,7 +38,7 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 - **Nodemon**: For restarting server on save.
 
-- **Netlify**: For frontend development, testing on live server.
+- **Netlify**: For frontend development, testing on _live_ server.
 
 ### 📑 **Prerequisites**
 
