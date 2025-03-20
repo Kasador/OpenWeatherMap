@@ -18,7 +18,7 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 [![Tech Stack Icons](https://skillicons.dev/icons?i=nodejs,express,scss,vite)](https://skillicons.dev)
 
-[![Tech Stack Icons](https://skillicons.dev/icons?i=mongodb,npm,postman)](https://skillicons.dev)
+[![Tech Stack Icons](https://skillicons.dev/icons?i=mongodb,npm,postman,netlify)](https://skillicons.dev)
 
 ### 📘 **Frontend**
 
@@ -37,6 +37,8 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 - **Postman**: For testing and developing the endpoints for backend development.
 
 - **Nodemon**: For restarting server on save.
+
+- **Netlify**: For frontend development, testing on live server.
 
 ### 📑 **Prerequisites**
 
