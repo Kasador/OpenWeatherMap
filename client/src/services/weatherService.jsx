@@ -9,18 +9,18 @@ const getWeatherData = async () => {
         navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
+
+            const res = await axios.get(`https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`);
+            
+            if (res.status !== 200) { // if not success
+                throw new Error('Error getting weather data.');
+            }
+
+            const data = res.data;
+            console.log(data);
+
+            return data;
         });
-        
-        const res = await axios.get(`https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`);
-
-        if (res.status !== 200) { // if not success
-            throw new Error('Error getting weather data.');
-        }
-
-        const data = res.data;
-        console.log(data);
-
-        return data;
     } catch (error) {
         console.error('Oh no! Something went wrong: ', error);
         alert('No location found!');
