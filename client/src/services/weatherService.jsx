@@ -1,14 +1,18 @@
 import axios from 'axios';
 
 const getWeatherData = async () => {
-    // const storeWeatherData = localStorage.getItem('weatherData'); // check to see if we have data in localStorage
+    if (!navigator.geolocation) { // getting users location not supported by browser
+        alert("Geolocation is not supported by your browser. Please use a different browser.");
+        return;
+    }
 
-    // if (storeWeatherData) {
-    //     return JSON.parse(storeWeatherData); // parse the data to JSON and return it. PRO TIP: add return to not run anything else below
-    // }
-    // https://axios-http.com/docs/handling_errors
+    navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+    });
+
     try { // fetch data from my api
-        const res = await axios.get('https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=36.1699&lon=-115.1398');
+        const res = await axios.get(`https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`);
 
         if (res.status !== 200) { // if not success
             throw new Error('Error getting weather data.');
@@ -20,8 +24,15 @@ const getWeatherData = async () => {
         return data;
     } catch (error) {
         console.error('Oh no! Something went wrong: ', error);
-        throw error;
+        alert('No location found!');
+        // throw error;
     }
 };
 
 export default getWeatherData;
+
+/* REF:
+    1) https://axios-http.com/docs/
+    2) https://axios-http.com/docs/handling_errors
+    3) https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+*/
