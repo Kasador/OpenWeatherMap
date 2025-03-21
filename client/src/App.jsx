@@ -1,10 +1,12 @@
 import './App.scss'
 // Imported Components
+import Weather from './components/Weather';
 
 function App() {
   return (
     <>
-     <h1>Setup - Test</h1>
+     <h1>Test</h1>
+     <Weather />
     </>
   )
 }
