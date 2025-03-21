@@ -4,7 +4,7 @@ const connectDB = require('./app/db/config'); // require the config file
 
 connectDB(); // connect to database
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => { // event handler (listen) - console message
     console.log(`Server is running on port: ${PORT}`);
