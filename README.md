@@ -122,7 +122,7 @@ Currently, two official plugins are available:
 
 ### **💾🛢 Pull data from database _if available._ ⤸**
 
-**server/app/controller/weatherController.js**
+**_server/app/controller/weatherController.js_**
 
 ```js
 const getWeather = async (req, res) => { // get all Weather func
@@ -192,4 +192,40 @@ const getWeather = async (req, res) => { // get all Weather func
 
 ### **⛃ ☁︎ Connected database to Atlas for _live dev server_. ⤸**
 
+### **‼️Important**
+
+**_Reference:_** 
+
+- [Netlify Docs](https://www.netlify.com/integrations/mongodb/)
+
+- [MongoDB Docs](https://www.mongodb.com/developer/languages/javascript/developing-web-application-netlify-serverless-functions-mongodb/)
+
+**_server/app/db/config.js_**
+
+**Make sure to add this line to your _config.js_ file.**
+
+- _Edit this string in your **.env** file:_
+
+`'mongodb+srv://$username:$password@$cluster.mongodb.net/$dbname?retryWrites=true&w=majority&appName=$appname';`
+
+```js 
+const dbURI = process.env.MONGODB_URI || process.env.MONGO_URI_ATLAS;
+const conn = await mongoose.connect(dbURI); // Connect to either localhost OR Atlas database.
+```
+
+**_server/server.js_**
+
+**Make sure you do **NOT** add your _PORT_ env variable to dev server and have your _PORT_ variable like this.**
+
+```js
+const PORT = process.env.PORT || 3001; // Use localhost port OR 3001 >>> local database or Atlas database. 
+```
+
+- Use variables in _.env_ and replace with your real data.
+- Upload and add your variables from _.env_ to your dev server.
+- Make sure to edit your _settings_ on Atlas.
+- Change the _URL_ on your fetch request to the _dev server_ on the **client-side**.
+- Update the _Network Access_ settings in your **Atlas Console** to include your dev server.
+- Add _admin permissions_ to a user for connection. 
+ 
 ![Image](https://github.com/user-attachments/assets/aade7f7e-256e-43bf-a343-8ac275e22c80)

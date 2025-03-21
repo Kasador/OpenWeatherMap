@@ -8,7 +8,7 @@ const getWeatherData = async () => {
     // }
     // https://axios-http.com/docs/handling_errors
     try { // fetch data from my api
-        const res = await axios.get('http://localhost:3000/api/geo-data?lat=36.1699&lon=-115.1398');
+        const res = await axios.get('https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=36.1699&lon=-115.1398');
 
         if (res.status !== 200) { // if not success
             throw new Error('Error getting weather data.');
