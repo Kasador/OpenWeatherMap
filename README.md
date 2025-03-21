@@ -66,7 +66,9 @@ Currently, two official plugins are available:
 - `npm i -D nodemon`
 - `npm i mongoose`
 - `npm create vite@latest`
-- `npm install concurrently --save-dev`
+- `npm i concurrently --save-dev`
+- `npm i axios`
+- `npm i cors`
 
 # 🛠️ Progress
 
@@ -113,3 +115,77 @@ Currently, two official plugins are available:
 - [x] Connect **MongoDB** database.
 
 ![Image](https://github.com/user-attachments/assets/ea919864-620c-4b20-b629-62ef6e369091)
+
+### 🎉🤝 **Connected _Frontend to Backend_**
+
+![Image](https://github.com/user-attachments/assets/4fbe9da3-b50c-47e8-8854-99a98ff81c02)
+
+### 💾🛢 **Pull data from database _if available._**
+
+**server/app/controller/weatherController.js**
+
+```js
+const getWeather = async (req, res) => { // get all Weather func
+    try {
+        const apiKey = process.env.WEATHER_API_KEY;
+
+        if (!apiKey) {
+            return res.status(500).json({
+                error: 'Api key is missing in env variables.'
+            });
+        }
+        
+        const { lat, lon } = req.query; // get location on query
+
+        const checkLocation = await Weather.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
+            "data.coord.lat": lat,
+            "data.coord.lon": lon,
+        });
+
+        console.log('checkLocation:', checkLocation); // see data from checkLocation
+
+        if (checkLocation) {
+            console.log('Data from db');
+            return res.status(200).json({
+                data: checkLocation.data,
+                success: true,
+                message: 'Request from database...'
+            });
+        };
+
+        console.log('New fetch request from external API...');
+        
+        const weatherRes = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+            params: {
+                lat,
+                lon,
+                appid: apiKey,
+            },
+            message: 'New fetch request from external API...'
+        });
+
+        // console.log('Weather API response:', weatherRes.data);
+        const data = weatherRes.data;
+        const newWeatherData = new Weather({
+            data: data
+        });
+
+        await newWeatherData.save(); // save to database
+
+        res.status(200).json({
+            data: data,
+            success: true,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: 'Error fetching data.',
+            method: req.method,
+        });
+    }
+}
+```
+
+![Image](https://github.com/user-attachments/assets/ce3f3dac-f2e8-42ba-96cd-51528730adbd)
+
+![Image](https://github.com/user-attachments/assets/dbcb7e16-5ec2-4779-b0e5-f308b4abd4e8)
