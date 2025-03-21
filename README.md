@@ -72,7 +72,7 @@ Currently, two official plugins are available:
 
 # 🛠️ Progress
 
-### ✨⚙️ Setup **Complete**
+### **✨⚙️ Setup _Complete_ ⤸**
 
 - Add to the root of the project folder.
 ```json
@@ -116,11 +116,11 @@ Currently, two official plugins are available:
 
 ![Image](https://github.com/user-attachments/assets/ea919864-620c-4b20-b629-62ef6e369091)
 
-### 🎉🤝 **Connected _Frontend to Backend_**
+### **🎉🤝 Connected _Frontend to Backend_ ⤸**
 
 ![Image](https://github.com/user-attachments/assets/4fbe9da3-b50c-47e8-8854-99a98ff81c02)
 
-### 💾🛢 **Pull data from database _if available._**
+### **💾🛢 Pull data from database _if available._ ⤸**
 
 **server/app/controller/weatherController.js**
 
@@ -189,3 +189,7 @@ const getWeather = async (req, res) => { // get all Weather func
 ![Image](https://github.com/user-attachments/assets/ce3f3dac-f2e8-42ba-96cd-51528730adbd)
 
 ![Image](https://github.com/user-attachments/assets/dbcb7e16-5ec2-4779-b0e5-f308b4abd4e8)
+
+### **⛃ ☁︎ Connected database to Atlas for _live dev server_. ⤸**
+
+![Image](https://github.com/user-attachments/assets/aade7f7e-256e-43bf-a343-8ac275e22c80)
