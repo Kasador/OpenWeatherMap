@@ -21,6 +21,8 @@ const Weather = () => {
         fetchWeatherData(); // try and fetch the weather data w/ error handling
     }, []); // this runs once the component mounts
 
+    console.log(weather, 'data');
+
     if (loading) return <div>Loading... Please Wait.</div>
     if (error) return <div>Oh no! There was an error: {error}</div>
 
