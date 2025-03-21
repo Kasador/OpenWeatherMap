@@ -18,11 +18,11 @@ const Weather = () => {
             }
         };
 
-        console.log(weather, 'data');
-
         fetchWeatherData(); // try and fetch the weather data w/ error handling
     }, []); // this runs once the component mounts
 
+    // console.log(wrapper.debug('debugg console.log', weather));
+    console.log('normal console.log', weather);
 
     if (loading) return <div>Loading... Please Wait.</div>
     if (error) return <div>Oh no! There was an error: {error}</div>
@@ -43,3 +43,7 @@ const Weather = () => {
 }
 
 export default Weather;
+
+/* REF:
+    1) https://stackoverflow.com/questions/54596066/how-to-read-console-log-from-a-mounted-component-with-enzyme-and-jest-in-create
+*/
