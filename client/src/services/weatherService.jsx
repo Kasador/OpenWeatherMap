@@ -11,7 +11,7 @@ const getWeatherData = async () => {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
 
-            const getWeather = `https://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}` || `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`;
+            const getWeather = `http://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}` || `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`;
             const res = await axios.get(getWeather);
 
             if (res.status !== 200 || !res.data) { // if not success
