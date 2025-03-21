@@ -5,13 +5,12 @@ const getWeatherData = async () => {
         alert("Geolocation is not supported by your browser. Please use a different browser.");
         return;
     }
-
-    navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
-    });
-
     try { // fetch data from my api
+        navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+        });
+        
         const res = await axios.get(`https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`);
 
         if (res.status !== 200) { // if not success
