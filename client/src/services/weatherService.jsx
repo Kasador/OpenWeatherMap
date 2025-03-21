@@ -5,15 +5,16 @@ const getWeatherData = async () => {
         alert("Geolocation is not supported by your browser. Please use a different browser.");
         return;
     }
+
     try { // fetch data from my api
         navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
 
-            const getWeather = `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}` || `https://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}`
+            const getWeather = `https://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}` || `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`;
             const res = await axios.get(getWeather);
 
-            if (res.status !== 200) { // if not success
+            if (res.status !== 200 || !res.data) { // if not success
                 throw new Error('Error getting weather data.');
             }
 
@@ -21,6 +22,9 @@ const getWeatherData = async () => {
             console.log(data);
 
             return data;
+        }, (error) => {
+            console.error('Location error: ', error);
+            alert('Error getting your location.');
         });
     } catch (error) {
         console.error('Oh no! Something went wrong: ', error);
