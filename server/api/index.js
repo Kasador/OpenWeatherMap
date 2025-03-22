@@ -1,8 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
-const app = express();
 const routeHandler = require('./routes/weatherRoutes');
 const cors = require('cors'); // allow connection to frontend
+const serverless = require('serverless-http');
+
+const app = express();
 
 // middlewares >>>
 app.use(cors());
@@ -17,4 +19,6 @@ app.use('/api/geo-data', routeHandler); // /api/geo-data
 
 // app.use('/api', routeHandler);
 
-module.exports = app;
+module.exports.handler = serverless(app);
+
+// Ref: https://www.npmjs.com/package/serverless-http
