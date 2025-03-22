@@ -38,7 +38,9 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 - **Nodemon**: For restarting server on save.
 
-- **Netlify**: For frontend development, testing on _live_ server.
+- **Netlify**: For frontend development, testing on _live_ server. Deployment for **client-side**.
+
+- **Vercel**: For backend development, testing on _live_ server. Deployment for **server-side**.
 
 ### 📑 **Prerequisites**
 
