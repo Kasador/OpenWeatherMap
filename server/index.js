@@ -1,6 +1,6 @@
 require('dotenv').config(); // import once, for use of env variables thru-out application/api
 const app = require('./api'); // main app >>> All dev inside this folder
-const connectDB = require('./app/db/config'); // require the config file 
+const connectDB = require('./api/db/config'); // require the config file 
 
 connectDB(); // connect to database
 
