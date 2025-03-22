@@ -21,4 +21,7 @@ app.use('/api/geo-data', routeHandler); // /api/geo-data
 
 module.exports.handler = serverless(app);
 
-// Ref: https://www.npmjs.com/package/serverless-http
+/* Ref: 
+    1) https://www.npmjs.com/package/serverless-http
+    2) https://www.youtube.com/watch?v=B-T69_VP2Ls&ab_channel=CodingGarden
+*/
