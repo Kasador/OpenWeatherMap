@@ -2,7 +2,7 @@ const mongoose = require('mongoose'); // npm package for easy connection to Mong
 
 const connectDB = async () => { // async func to connect to db, needs time
     try { // try to connect to db 
-        const dbURI = process.env.MONGODB_URI || process.env.MONGO_URI_ATLAS;
+        const dbURI = process.env.MONGODB_URI; // || process.env.MONGO_URI_ATLAS;
         const conn = await mongoose.connect(dbURI); // connect to db using env variables; then connect to either localhost OR Atlas database.
 
         console.log(`Connected to MongoDB successfully: ${conn.connection.host}.`);
