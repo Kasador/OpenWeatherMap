@@ -18,7 +18,7 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 [![Tech Stack Icons](https://skillicons.dev/icons?i=nodejs,express,scss,vite)](https://skillicons.dev)
 
-[![Tech Stack Icons](https://skillicons.dev/icons?i=mongodb,npm,postman,netlify)](https://skillicons.dev)
+[![Tech Stack Icons](https://skillicons.dev/icons?i=mongodb,npm,postman,netlify,vercel)](https://skillicons.dev)
 
 ### 📘 **Frontend**
 
