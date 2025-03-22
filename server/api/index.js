@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
-const routeHandler = require('./api');
+const routeHandler = require('./routes');
 const cors = require('cors'); // allow connection to frontend
 
 // middlewares >>>
