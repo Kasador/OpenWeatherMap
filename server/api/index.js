@@ -13,7 +13,7 @@ app.get('/', (req, res) => { // main route to url/
     res.status(200).json({sucess: true, message: 'API is running...'});
 });
 
-app.use('/api/geo-data', routeHandler); // api/v1/weather
+app.use('/api/geo-data', routeHandler); // /api/geo-data
 
 // app.use('/api', routeHandler);
 
