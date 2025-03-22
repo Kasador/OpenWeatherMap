@@ -1,16 +1,19 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server/index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/geo-data/(.*)",
-        "dest": "/server/index.js"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/geo-data/(.*)",
+      "dest": "/server/api/index.js"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/api/index.js"
+    }
+  ]
+}

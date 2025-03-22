@@ -153,7 +153,7 @@ const deleteWeatherById = async (req, res) => { // delete Weather by id func
 }
 
 module.exports = { // export all funcs
-    getWeather,
+    getWeather
     // getWeatherById,
     // createWeather,
     // updateWeatherById,
