@@ -35,8 +35,7 @@ const getWeather = async (req, res) => { // get all Weather func
             return res.status(200).json({
                 data: checkLocation.data,
                 success: true,
-                message: 'Request from database...',
-                method: req.method,
+                message: `Request Made: ${req.method} from /api/geo-data endpoint. Request from database...`,
             });
         };
 
@@ -64,8 +63,7 @@ const getWeather = async (req, res) => { // get all Weather func
         res.status(200).json({
             data: data,
             success: true,
-            message: 'New data fetched from external API and saved to the database',
-            method: req.method,
+            message: `Request Made: ${req.method} from /api/geo-data endpoint. Request from external API...`,
         });
     } catch (error) {
         console.error(error);
@@ -77,100 +75,148 @@ const getWeather = async (req, res) => { // get all Weather func
 }
 
 const getWeatherById = async (req, res) => { // get Weather by id func
-    // const { id } = req.params;
+    try {
+        const { id } = req.params;
+        const data = await Weather.findById(id);
 
-    // try {
-    //     const weatherData = await Weather.findById(id);
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found.",
+                id
+            });
+        }
 
-    //     res.status(200).json({
-    //         data: weatherData,
-    //         success: true,
-    //         message: `Request Made: ${req.method} from Weather endpoint.`,
-    //         id
-    //     });
-    // } catch (error) {
-    //     if (error.name === "ValidationError") {
-    //         console.error('Invalid', error);
-    //         res.status(422).json(error);
-    //     } else {
-    //         console.error(error);
-    //         res.status(500).json(error);
-    //     }
-    // }
+        res.status(200).json({
+            data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`,
+            id
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+const getAllWeather = async (req, res) => { // get Weather by id func
+    try {
+        const data = await Weather.find({});
+
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found.",
+                id
+            });
+        }
+
+        res.status(200).json({
+            data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
 }
 
 const createWeather = async (req, res) => { // create new guest func
-    // const { weather } = req.body;
+    try {
+        const { data } = req.body;
+        const newWeather = new Weather({
+            data: data
+        });
 
-    // try {
-    //     const weatherData = await weatherData.create(weather); // name of schema - "Weather"
-    //     console.log("data: ", weatherData); 
+        const newWeatherData = await newWeather.save();
+        console.log("New Weather Data: ", newWeatherData); 
 
-    //     res.status(200).json({
-    //         data: weather,
-    //         success: true,
-    //         message: `Request Made: ${req.method} from Weather endpoint.`
-    //     });
-    // } catch (error) {
-    //     if (error.name === "ValidationError") {
-    //         console.error('Invalid', error);
-    //         res.status(422).json(error);
-    //     } else {
-    //         console.error(error);
-    //         res.status(500).json(error);
-    //     }
-    // }
+        res.status(200).json({
+            data: newWeatherData,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
 }
 
 const updateWeatherById = async (req, res) => { // update Weather by id func
-    // const { id } = req.params;
+    try {
+        const { id } = req.params;
+        const updatedWeather = await Weather.findByIdAndUpdate(id, { $set: req.body }, { new: true }); // 3 params - schema, data, new set to true (new version, not old)
+        console.log('Received Data:', req.body);
 
-    // try {
-    //     const weather = await Weather.findByIdAndUpdate(id, req.body, { new: true }); // 3 params - schema, data, new set to true (new version, not old)
+        if (!updatedWeather) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found.",
+                id
+            });
+        }
 
-    //     res.status(200).json({
-    //         data: weather,
-    //         success: true,
-    //         message: `Request Made: ${req.method} from Weather endpoint.`
-    //     });
-    // } catch (error) {
-    //     if (error.name === "ValidationError") {
-    //         console.error('Invalid', error);
-    //         res.status(422).json(error);
-    //     } else {
-    //         console.error(error);
-    //         res.status(500).json(error);
-    //     }
-    // }
+        res.status(200).json({
+            data: updatedWeather,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
 }
 
 const deleteWeatherById = async (req, res) => { // delete Weather by id func
-    // const { id } = req.params;
+    try {
+        const { id } = req.params;
+        const weather = await Weather.findByIdAndDelete(id);
 
-    // try {
-    //     const weather = await Weather.findByIdAndDelete(id);
-
-    //     res.status(200).json({
-    //         data: weather,
-    //         success: true,
-    //         message: `Request Made: ${req.method} from Weather endpoint.`,
-    //         id
-    //     });
-    // } catch (error) {
-    //     if (error.name === "ValidationError") {
-    //         console.error('Invalid', error);
-    //         res.status(422).json(error);
-    //     } else {
-    //         console.error(error);
-    //         res.status(500).json(error);
-    //     }
-    // }
+        res.status(200).json({
+            data: weather,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`,
+            id
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
 }
 
 module.exports = { // export all funcs
-    getWeather
-    // getWeatherById,
-    // createWeather,
-    // updateWeatherById,
-    // deleteWeatherById
+    getWeather,
+    getAllWeather,
+    getWeatherById,
+    createWeather,
+    updateWeatherById,
+    deleteWeatherById
 }
