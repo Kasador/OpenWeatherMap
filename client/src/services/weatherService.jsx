@@ -7,30 +7,27 @@ const getWeatherData = async () => {
     }
 
     try { // fetch data from my api
-        navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
-            const lat = pos.coords.latitude;
-            const lon = pos.coords.longitude;
-
-            const getWeather = `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`;
-
-            if (window.location.hostname === 'localhost') { // this will be fallback to see if using localhost or the dev server.
-                getWeather = `http://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}`;
-            }
-
-            const res = await axios.get(getWeather);
-
-            if (res.status !== 200 || !res.data.data) { // if not success
-                throw new Error('Error getting weather data.');
-            }
-
-            const data = res.data;
-            console.log(data);
-
-            return data;
-        }, (error) => {
-            console.error('Location error: ', error);
-            alert('Error getting your location.');
+        const data = await new Promise((resolve, reject) => { // this was needed to get the lat and lon data before hiting backend
+            navigator.geolocation.getCurrentPosition(async (pos) => { // wait get users location, ask permissions, then use to hit api.
+                    const lat = pos.coords.latitude;
+                    const lon = pos.coords.longitude;
+    
+                    const getWeather = `http://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}` || `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`;
+    
+                    try {
+                        const res = await axios.get(getWeather);
+                        resolve(res.data);
+                    } catch (error) {
+                        reject('Error fetching weather data...');
+                    }
+                }, 
+                (error) => {
+                    reject('Error fetching weather data...', error);
+            });
         });
+
+        return data;
+        
     } catch (error) {
         console.error('Oh no! Something went wrong: ', error);
         alert('No location found!');
