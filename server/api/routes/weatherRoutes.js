@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getWeather, } = require('../controller/weatherController'); // controller for main func to guests
+const { getWeather } = require('../controller/weatherController'); // controller for main func to weather
 
 router.get('/', getWeather);
 // router.get('/:id', getWeatherById);
