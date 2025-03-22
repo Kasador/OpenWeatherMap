@@ -7,13 +7,21 @@ const getWeather = async (req, res) => { // get all Weather func
 
         if (!apiKey) {
             return res.status(500).json({
-                error: 'Api key is missing in env variables.'
+                error: 'Api key is missing in env variables.',
+                method: req.method,
             });
         }
         
-        const { lat, lon } = req.query; // get location on query
+        const lat = parseFloat(req.query.lat).toFixed(4); // for exact match, wasn't saving in database 36.2872832 vs 36.2873
+        const lon = parseFloat(req.query.lon).toFixed(4);
+
 
         const checkLocation = await Weather.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
+            "data.coord.lat": lat,
+            "data.coord.lon": lon,
+        });
+
+        console.log('Check Location Query:', {
             "data.coord.lat": lat,
             "data.coord.lon": lon,
         });
@@ -21,15 +29,18 @@ const getWeather = async (req, res) => { // get all Weather func
         console.log('checkLocation:', checkLocation); // see data from checkLocation
 
         if (checkLocation) {
-            console.log('Data from db');
+            console.log('Data fetched from the database...');
+            res.set('Cache-Control', 'no-store');
+
             return res.status(200).json({
                 data: checkLocation.data,
                 success: true,
-                message: 'Request from database...'
+                message: 'Request from database...',
+                method: req.method,
             });
         };
 
-        console.log('New fetch request from external API...');
+        console.log('New data fetched from external API...');
         
         const weatherRes = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
             params: {
@@ -37,7 +48,6 @@ const getWeather = async (req, res) => { // get all Weather func
                 lon,
                 appid: apiKey,
             },
-            message: 'New fetch request from external API...'
         });
 
         // console.log('Weather API response:', weatherRes.data);
@@ -46,11 +56,16 @@ const getWeather = async (req, res) => { // get all Weather func
             data: data
         });
 
+        console.log("saved data", newWeatherData);
+
         await newWeatherData.save(); // save to database
 
+        res.set('Cache-Control', 'no-store');
         res.status(200).json({
             data: data,
             success: true,
+            message: 'New data fetched from external API and saved to the database',
+            method: req.method,
         });
     } catch (error) {
         console.error(error);
