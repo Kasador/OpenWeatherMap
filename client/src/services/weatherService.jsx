@@ -16,6 +16,7 @@ const getWeatherData = async () => {
     
                     try {
                         const res = await axios.get(getWeather);
+                        console.log('Weather Data: ', res.data);
                         resolve(res.data);
                     } catch (error) {
                         reject('Error fetching weather data...');
