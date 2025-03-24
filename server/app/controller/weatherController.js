@@ -18,7 +18,7 @@ const getWeather = async (req, res) => { // get all Weather func
         console.log('Received Lat:', lat);
         console.log('Received Lon:', lon);
 
-
+        // Ref: https://www.w3schools.com/mongodb/mongodb_query_operators.php
         const checkLocation = await Weather.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
            "data.coord.lat": { $gte: lat - 0.0001, $lte: lat + 0.0001 }, // for small differences, wasn't saving in database 36.2872832 vs 36.2873
             "data.coord.lon": { $gte: lon - 0.0001, $lte: lon + 0.0001 },
@@ -109,13 +109,45 @@ const getWeatherById = async (req, res) => { // get Weather by id func
 
 const getAllWeather = async (req, res) => { // get Weather by id func
     try {
-        const data = await Weather.find({});
+        console.log('Queries: ', req.query);
+        const data = await Weather.find({}); // make queries strings for get back selective weather and not everything. 
 
         if (!data) {
             return res.status(404).json({
                 success: false,
                 message: "Weather data not found.",
                 id
+            });
+        }
+
+        res.status(200).json({
+            data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+const getWeatherByName = async (req, res) => { // get Weather by name func http://localhost:3000/api/search?name=Eastland%20Heights
+    try {
+        console.log('Queries: ', req.query);
+        // const { name } = req.query; // get name from the query
+        const data = await Weather.find({
+            "data.name": req.query.name
+        });
+
+        if (data.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found by that name.",
             });
         }
 
@@ -221,5 +253,6 @@ module.exports = { // export all funcs
     getWeatherById,
     createWeather,
     updateWeatherById,
-    deleteWeatherById
+    deleteWeatherById,
+    getWeatherByName
 }
