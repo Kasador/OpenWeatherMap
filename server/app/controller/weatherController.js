@@ -12,13 +12,16 @@ const getWeather = async (req, res) => { // get all Weather func
             });
         }
         
-        const lat = parseFloat(req.query.lat).toFixed(4); // for exact match, wasn't saving in database 36.2872832 vs 36.2873
-        const lon = parseFloat(req.query.lon).toFixed(4);
+        const lat = parseFloat(req.query.lat); // toFixed(4) no longer needed with $gte and $lte for the small differences 
+        const lon = parseFloat(req.query.lon);
+
+        console.log('Received Lat:', lat);
+        console.log('Received Lon:', lon);
 
 
         const checkLocation = await Weather.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
-            "data.coord.lat": lat,
-            "data.coord.lon": lon,
+           "data.coord.lat": { $gte: lat - 0.0001, $lte: lat + 0.0001 }, // for small differences, wasn't saving in database 36.2872832 vs 36.2873
+            "data.coord.lon": { $gte: lon - 0.0001, $lte: lon + 0.0001 },
         });
 
         console.log('Check Location Query:', {
