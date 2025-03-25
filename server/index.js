@@ -10,4 +10,8 @@ app.listen(PORT, () => { // event handler (listen) - console message
     console.log(`Server is running on port: ${PORT}`);
 });
 
-// https://community.render.com/t/error-cannot-find-module/6781 to do a render deployment
+/* REF:
+    1) https://nodejs.org/en/learn/getting-started/nodejs-the-difference-between-development-and-production
+    2) https://community.render.com/t/error-cannot-find-module/6781 to do a render deployment
+    3) https://youtu.be/tNpoc86cHrQ
+*/

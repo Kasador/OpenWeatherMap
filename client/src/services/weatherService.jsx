@@ -1,4 +1,5 @@
 import axios from 'axios';
+require('dotenv').config();
 
 const getWeatherData = async () => {
     if (!navigator.geolocation) { // getting users location not supported by browser
@@ -12,8 +13,13 @@ const getWeatherData = async () => {
                     const lat = pos.coords.latitude;
                     const lon = pos.coords.longitude;
     
-                    const getWeather = `http://localhost:3000/api/geo-data?lat=${lat}&lon=${lon}` || `https://hunterstevenshaw-weatherapp.netlify.app/api/geo-data?lat=${lat}&lon=${lon}`;
-    
+                    let getWeather;
+                    
+                    if (process.env.NODE_ENV === 'production') { // check to see if the app is on localhost or live dev server
+                        getWeather = process.env.PRODUCTION_URL;
+                    } else {
+                        getWeather = process.env.DEVELOPMENT_URL;
+                    }
                     try {
                         const res = await axios.get(getWeather);
                         console.log('Weather Data: ', res.data);
