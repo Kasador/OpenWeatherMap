@@ -30,15 +30,15 @@ const Weather = () => {
     return (
         <>
             <div>
-                <h1>Weather in {weather.data.name}</h1>
+                <h1>Weather in... <br></br><span>{weather.data.name}</span></h1>
                 <section>
                     <img src={`http://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} alt="weather icon" />
                     <p>{weather.data.weather[0].description}</p>
                 </section>
-                    <p>Temperature: {Math.round((weather.data.main.temp - 273.1) * 1.8 +32)}&#8457;</p>
-                    <p>Feels Like: {Math.round((weather.data.main.feels_like - 273.1) * 1.8 +32)}&#8457;</p>
-                    <p>Wind Speed: {Math.round(weather.data.wind.speed * 2.2369)} mph</p>
-                <p>Humidity: {weather.data.main.humidity}%</p>
+                    <p><strong>Temperature:</strong> {Math.round((weather.data.main.temp - 273.1) * 1.8 +32)}&#8457;</p>
+                    <p><strong>Feels Like:</strong> {Math.round((weather.data.main.feels_like - 273.1) * 1.8 +32)}&#8457;</p>
+                    <p><strong>Wind Speed:</strong> {Math.round(weather.data.wind.speed * 2.2369)} mph</p>
+                    <p><strong>Humidity:</strong> {weather.data.main.humidity}%</p>
             </div>
         </>
     )
