@@ -32,7 +32,7 @@ const CurrentWeather = () => {
             <div>
                 <h1>Weather in... <br></br><span>{weather.data.name}</span></h1>
                 <section>
-                    <img src={`http://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} alt="weather icon" />
+                    <img src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} alt="weather icon" />
                     <p>{weather.data.weather[0].description}</p>
                 </section>
                     <p><strong>Temperature:</strong> {Math.round((weather.data.main.temp - 273.15) * 1.8 +32)}&#8457;</p>
