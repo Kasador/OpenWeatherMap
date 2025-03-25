@@ -38,7 +38,7 @@ const ForecastWeather = () => {
                             <p>{Math.round((item.main.temp - 273.15) * 1.8 +32)}&#8457;</p>
                             <p>{item.weather[0].description}</p>
                         </li>
-                    ))};
+                    ))}
                 </ol>
             </div>
         </>
