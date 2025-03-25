@@ -14,7 +14,7 @@ const getWeatherData = async () => {
                     const lon = pos.coords.longitude;
     
                     let getWeather;
-
+                    // Ref: https://vite.dev/guide/env-and-mode >>> How to import env variables in vite, dotenv no longer needed
                     if (import.meta.env.NODE_ENV === 'production') { // check to see if the app is on localhost or live dev server
                         getWeather = import.meta.env.PRODUCTION_URL;
                     } else {
