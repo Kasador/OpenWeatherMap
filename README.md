@@ -12,6 +12,25 @@
 
 Repository made to create/develop a small weather app. Using the **_OpenWeatherMap API_**, I will develop a the weather app using the MERN tech stack connecting the data to my API and then from there, storing the data into MongoDB. This app is built using _**npm create vite@latest**_ for the frontend. The new tech stack is designed for simplicity, performance, and ease of content management for future development and maintenance.
 
+## 💯🚀🎯 Major Achievements
+
+### **🎉⛃ Connected backend to frontend; now pulling data from _Atlas_ MongoDB. ⤸**
+
+### ╰┈➤ **🌐 Live dev URL:** [https://hunterstevenshaw-weatherapp.netlify.app/](https://hunterstevenshaw-weatherapp.netlify.app/)
+
+- Using Render _(https://render.com/)_ to host my Express/NodeJS app.
+- Connected _backend_ to _frontend_. 
+- Edited and saved _.env_ variables to make sure all data is secure and used correctly. 
+- Changed and added error handling for _URL/endpoints_.
+- Parsed data correctly and got back a formatted _JSON Response_.
+- Used from _API_. **(External API > Atlas MongoDB database > Own API > Client)**
+- Operation **_fullstack_** application w/ connections and hosting of both the _backend_ and _frontend_. 
+- Gained **_+5,600xp_** and **_+2_** whole levels. I can now train to use the spell **_🔥 Pyroblast_**. 
+
+![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
+
+![Image](https://github.com/user-attachments/assets/c80bc091-099e-4687-b782-e90dd35c8ab6)
+
 # ⚛️ **Tech Stack Overview (MERN)** 
 
 [![Tech Stack Icons](https://skillicons.dev/icons?i=js,html,css,react)](https://skillicons.dev)
@@ -38,7 +57,9 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 - **Nodemon**: For restarting server on save.
 
-- **Netlify**: For frontend development, testing on _live_ server.
+- **Netlify**: For frontend development, testing on _live_ server. Deployment for **client-side**. _(https://www.netlify.com/)_
+
+- **Render**: For backend development, testing on _live_ server. Deployment for **server-side**. _(https://render.com/)_
 
 ### 📑 **Prerequisites**
 
@@ -66,11 +87,13 @@ Currently, two official plugins are available:
 - `npm i -D nodemon`
 - `npm i mongoose`
 - `npm create vite@latest`
-- `npm install concurrently --save-dev`
+- `npm i concurrently --save-dev`
+- `npm i axios`
+- `npm i cors`
 
 # 🛠️ Progress
 
-### ✨⚙️ Setup **Complete**
+### **✨⚙️ Setup _Complete_ ⤸**
 
 - Add to the root of the project folder.
 ```json
@@ -113,3 +136,363 @@ Currently, two official plugins are available:
 - [x] Connect **MongoDB** database.
 
 ![Image](https://github.com/user-attachments/assets/ea919864-620c-4b20-b629-62ef6e369091)
+
+### **🎉🤝 Connected _Frontend to Backend_ ⤸**
+
+![Image](https://github.com/user-attachments/assets/4fbe9da3-b50c-47e8-8854-99a98ff81c02)
+
+### **💾🛢 Pull data from database _if available._ ⤸**
+
+**_server/app/controller/weatherController.js_**
+
+```js
+const getWeather = async (req, res) => { // get all Weather func
+    try {
+        const apiKey = process.env.WEATHER_API_KEY;
+
+        if (!apiKey) {
+            return res.status(500).json({
+                error: 'Api key is missing in env variables.'
+            });
+        }
+        
+        const { lat, lon } = req.query; // get location on query
+
+        const checkLocation = await Weather.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
+            "data.coord.lat": lat,
+            "data.coord.lon": lon,
+        });
+
+        console.log('checkLocation:', checkLocation); // see data from checkLocation
+
+        if (checkLocation) {
+            console.log('Data from db');
+            return res.status(200).json({
+                data: checkLocation.data,
+                success: true,
+                message: 'Request from database...'
+            });
+        };
+
+        console.log('New fetch request from external API...');
+        
+        const weatherRes = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+            params: {
+                lat,
+                lon,
+                appid: apiKey,
+            },
+            message: 'New fetch request from external API...'
+        });
+
+        // console.log('Weather API response:', weatherRes.data);
+        const data = weatherRes.data;
+        const newWeatherData = new Weather({
+            data: data
+        });
+
+        await newWeatherData.save(); // save to database
+
+        res.status(200).json({
+            data: data,
+            success: true,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: 'Error fetching data.',
+            method: req.method,
+        });
+    }
+}
+```
+
+![Image](https://github.com/user-attachments/assets/ce3f3dac-f2e8-42ba-96cd-51528730adbd)
+
+![Image](https://github.com/user-attachments/assets/dbcb7e16-5ec2-4779-b0e5-f308b4abd4e8)
+
+### **⛃ ☁︎ Connected database to Atlas for _live dev server_. ⤸**
+
+### **‼️Important**
+
+**_Reference:_** 
+
+- [Netlify Docs](https://www.netlify.com/integrations/mongodb/)
+
+- [MongoDB Docs](https://www.mongodb.com/developer/languages/javascript/developing-web-application-netlify-serverless-functions-mongodb/)
+
+**_server/app/db/config.js_**
+
+**Make sure to add this line to your _config.js_ file.**
+
+- _Edit this string in your **.env** file:_
+
+`'mongodb+srv://$username:$password@$cluster.mongodb.net/$dbname?retryWrites=true&w=majority&appName=$appname';`
+
+```js 
+const dbURI = process.env.MONGODB_URI || process.env.MONGO_URI_ATLAS;
+const conn = await mongoose.connect(dbURI); // Connect to either localhost OR Atlas database.
+```
+
+**_server/server.js_**
+
+**Make sure you do **NOT** add your _PORT_ env variable to dev server and have your _PORT_ variable like this.**
+
+```js
+const PORT = process.env.PORT || 3001; // Use localhost port OR 3001 >>> local database or Atlas database. 
+```
+
+- Use variables in _.env_ and replace with your real data.
+- Upload and add your variables from _.env_ to your dev server.
+- Make sure to edit your _settings_ on Atlas.
+- Change the _URL_ on your fetch request to the _dev server_ on the **client-side**.
+- Update the _Network Access_ settings in your **Atlas Console** to include your dev server.
+- Add _admin permissions_ to a user for connection. 
+ 
+![Image](https://github.com/user-attachments/assets/aade7f7e-256e-43bf-a343-8ac275e22c80)
+
+### **⛃ Updated controller/API to have _CRUD_ operations. ⤸**
+
+**_server/app/weatherController.js_**
+
+```js
+const Weather = require('../models/Weather'); // import the Weather model
+const axios = require('axios');
+
+const getWeather = async (req, res) => { // get all Weather func
+    try {
+        const apiKey = process.env.WEATHER_API_KEY;
+
+        if (!apiKey) {
+            return res.status(500).json({
+                error: 'Api key is missing in env variables.',
+                method: req.method,
+            });
+        }
+        
+        const lat = parseFloat(req.query.lat).toFixed(4); // for exact match, wasn't saving in database 36.2872832 vs 36.2873
+        const lon = parseFloat(req.query.lon).toFixed(4);
+
+
+        const checkLocation = await Weather.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
+            "data.coord.lat": lat,
+            "data.coord.lon": lon,
+        });
+
+        console.log('Check Location Query:', {
+            "data.coord.lat": lat,
+            "data.coord.lon": lon,
+        });
+
+        console.log('checkLocation:', checkLocation); // see data from checkLocation
+
+        if (checkLocation) {
+            console.log('Data fetched from the database...');
+            res.set('Cache-Control', 'no-store');
+
+            return res.status(200).json({
+                data: checkLocation.data,
+                success: true,
+                message: `Request Made: ${req.method} from /api/geo-data endpoint. Request from database...`,
+            });
+        };
+
+        console.log('New data fetched from external API...');
+        
+        const weatherRes = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+            params: {
+                lat,
+                lon,
+                appid: apiKey,
+            },
+        });
+
+        // console.log('Weather API response:', weatherRes.data);
+        const data = weatherRes.data;
+        const newWeatherData = new Weather({
+            data: data
+        });
+
+        console.log("saved data", newWeatherData);
+
+        await newWeatherData.save(); // save to database
+
+        res.set('Cache-Control', 'no-store');
+        res.status(200).json({
+            data: data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/geo-data endpoint. Request from external API...`,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: 'Error fetching data.',
+            method: req.method,
+        });
+    }
+}
+
+const getWeatherById = async (req, res) => { // get Weather by id func
+    try {
+        const { id } = req.params;
+        const data = await Weather.findById(id);
+
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found.",
+                id
+            });
+        }
+
+        res.status(200).json({
+            data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`,
+            id
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+const getAllWeather = async (req, res) => { // get Weather by id func
+    try {
+        const data = await Weather.find({});
+
+        if (!data) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found.",
+                id
+            });
+        }
+
+        res.status(200).json({
+            data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+const createWeather = async (req, res) => { // create new guest func
+    try {
+        const { data } = req.body;
+        const newWeather = new Weather({
+            data: data
+        });
+
+        const newWeatherData = await newWeather.save();
+        console.log("New Weather Data: ", newWeatherData); 
+
+        res.status(200).json({
+            data: newWeatherData,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+const updateWeatherById = async (req, res) => { // update Weather by id func
+    try {
+        const { id } = req.params;
+        const updatedWeather = await Weather.findByIdAndUpdate(id, { $set: req.body }, { new: true }); // 3 params - schema, data, new set to true (new version, not old)
+        console.log('Received Data:', req.body);
+
+        if (!updatedWeather) {
+            return res.status(404).json({
+                success: false,
+                message: "Weather data not found.",
+                id
+            });
+        }
+
+        res.status(200).json({
+            data: updatedWeather,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`
+        });
+
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+const deleteWeatherById = async (req, res) => { // delete Weather by id func
+    try {
+        const { id } = req.params;
+        const weather = await Weather.findByIdAndDelete(id);
+
+        res.status(200).json({
+            data: weather,
+            success: true,
+            message: `Request Made: ${req.method} from /api/weather endpoint.`,
+            id
+        });
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            console.error('Invalid', error);
+            res.status(422).json(error);
+        } else {
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+}
+
+module.exports = { // export all funcs
+    getWeather,
+    getAllWeather,
+    getWeatherById,
+    createWeather,
+    updateWeatherById,
+    deleteWeatherById
+}
+```
+
+### **🎉⛃ Connected backend to frontend; now pulling data from _Atlas_ MongoDB. ⤸**
+
+### ╰┈➤ **🌐 Live dev URL:** [https://hunterstevenshaw-weatherapp.netlify.app/](https://hunterstevenshaw-weatherapp.netlify.app/)
+
+- Using Render _(https://render.com/)_ to host my Express/NodeJS app.
+- Connected _backend_ to _frontend_. 
+- Edited and saved _.env_ variables to make sure all data is secure and used correctly. 
+- Changed and added error handling for _URL/endpoints_.
+- Parsed data correctly and got back a formatted _JSON Response_.
+- Used from _API_. **(External API > Atlas MongoDB database > Own API > Client)**
+- Operation **_fullstack_** application w/ connections and hosting of both the _backend_ and _frontend_. 
+- Gained **_+5,600xp_** and **_+2_** whole levels. I can now train to use the spell **_🔥 Pyroblast_**. 
+
+![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
+
+![Image](https://github.com/user-attachments/assets/c80bc091-099e-4687-b782-e90dd35c8ab6)
