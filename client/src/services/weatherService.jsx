@@ -1,5 +1,5 @@
 import axios from 'axios';
-require('dotenv').config();
+// require('dotenv').config();
 
 const getWeatherData = async () => {
     if (!navigator.geolocation) { // getting users location not supported by browser
@@ -14,11 +14,11 @@ const getWeatherData = async () => {
                     const lon = pos.coords.longitude;
     
                     let getWeather;
-                    
-                    if (process.env.NODE_ENV === 'production') { // check to see if the app is on localhost or live dev server
-                        getWeather = process.env.PRODUCTION_URL;
+
+                    if (import.meta.env.NODE_ENV === 'production') { // check to see if the app is on localhost or live dev server
+                        getWeather = import.meta.env.PRODUCTION_URL;
                     } else {
-                        getWeather = process.env.DEVELOPMENT_URL;
+                        getWeather = import.meta.env.DEVELOPMENT_URL;
                     }
                     try {
                         const res = await axios.get(getWeather);
