@@ -10,4 +10,4 @@ app.listen(PORT, () => { // event handler (listen) - console message
     console.log(`Server is running on port: ${PORT}`);
 });
 
-// https://www.youtube.com/watch?v=nVNf_mTIFFw&feature=youtu.be >>> to host express app to heroku
+// https://community.render.com/t/error-cannot-find-module/6781 to do a render deployment
