@@ -29,6 +29,8 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 ![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
 
+![Image](https://github.com/user-attachments/assets/c80bc091-099e-4687-b782-e90dd35c8ab6)
+
 # ⚛️ **Tech Stack Overview (MERN)** 
 
 [![Tech Stack Icons](https://skillicons.dev/icons?i=js,html,css,react)](https://skillicons.dev)
@@ -492,3 +494,5 @@ module.exports = { // export all funcs
 - Gained **_+5,600xp_** and **_+2_** whole levels. I can now train to use the spell **_🔥 Pyroblast_**. 
 
 ![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
+
+![Image](https://github.com/user-attachments/assets/c80bc091-099e-4687-b782-e90dd35c8ab6)
