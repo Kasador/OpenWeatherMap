@@ -29,13 +29,15 @@ const Weather = () => {
 
     return (
         <>
-        <h1>Weather Data Testing:</h1>
             <div>
                 <h1>Weather in {weather.data.name}</h1>
-                <p>Temperature: {weather.data.main.temp} K</p>
-                <p>Condition: {weather.data.weather[0].description}</p>
-                <p>Feels Like: {weather.data.main.feels_like} K</p>
-                <p>Wind Speed: {weather.data.wind.speed} m/s</p>
+                <section>
+                    <img src={`http://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} alt="weather icon" />
+                    <p>{weather.data.weather[0].description}</p>
+                </section>
+                    <p>Temperature: {Math.round((weather.data.main.temp - 273.1) * 1.8 +32)}&#8457;</p>
+                    <p>Feels Like: {Math.round((weather.data.main.feels_like - 273.1) * 1.8 +32)}&#8457;</p>
+                    <p>Wind Speed: {Math.round(weather.data.wind.speed * 2.2369)} mph</p>
                 <p>Humidity: {weather.data.main.humidity}%</p>
             </div>
         </>
