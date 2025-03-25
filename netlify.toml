@@ -2,3 +2,4 @@
   base    = "client"
   command = "npm run build"
   publish = "dist"
+  environment = "NODE_ENV
