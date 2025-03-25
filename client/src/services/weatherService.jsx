@@ -16,9 +16,9 @@ const getWeatherData = async () => {
                     let getWeather;
                     // Ref: https://vite.dev/guide/env-and-mode >>> How to import env variables in vite, dotenv no longer needed
                     if (import.meta.env.VITE_NODE_ENV === 'production') { // check to see if the app is on localhost or live dev server
-                        getWeather = import.meta.env.VITE_PRODUCTION_URL; // so dumb, changed my production url to be my backend, not frontend. Haha.
+                        getWeather = `${import.meta.env.VITE_PRODUCTION_URL}?lat=${lat}&lon=${lon}`; // so dumb, changed my production url to be my backend, not frontend. Haha.
                     } else {
-                        getWeather = import.meta.env.VITE_DEVELOPMENT_URL;
+                        getWeather = `${import.meta.env.VITE_DEVELOPMENT_URL}?lat=${lat}&lon=${lon}`;
                     }
                     try {
                         const res = await axios.get(getWeather);
