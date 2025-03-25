@@ -496,3 +496,89 @@ module.exports = { // export all funcs
 ![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
 
 ![Image](https://github.com/user-attachments/assets/c80bc091-099e-4687-b782-e90dd35c8ab6)
+
+### **🆕🌦️ Added _five day forecast_ data to API/database. ⤸**
+
+**_server/app/weatherController.js_**
+
+- `getForecastWeather` function.
+
+```js
+const getForecastWeather = async (req, res) => { // get forecast Weather func
+    try {
+        const apiKey = process.env.WEATHER_API_KEY;
+
+        if (!apiKey) {
+            return res.status(500).json({
+                error: 'Api key is missing in env variables.',
+                method: req.method,
+            });
+        }
+        
+        const lat = parseFloat(req.query.lat); // toFixed(4) no longer needed with $gte and $lte for the small differences 
+        const lon = parseFloat(req.query.lon);
+
+        console.log('Received Lat:', lat);
+        console.log('Received Lon:', lon);
+
+        // Ref: https://www.w3schools.com/mongodb/mongodb_query_operators.php
+        const checkLocation = await WeatherForecast.findOne({ // check to see if this is a new location, if so, then we need to hit external api again
+           "data.city.coord.lat": { $gte: lat - 0.0001, $lte: lat + 0.0001 }, // for small differences, wasn't saving in database 36.2872832 vs 36.2873
+            "data.city.coord.lon": { $gte: lon - 0.0001, $lte: lon + 0.0001 },
+        });
+
+        console.log('Check Location Query:', {
+            "data.coord.lat": lat,
+            "data.coord.lon": lon,
+        });
+
+        console.log('checkLocation:', checkLocation); // see data from checkLocation
+
+        if (checkLocation) {
+            console.log('Data fetched from the database...');
+            res.set('Cache-Control', 'no-store');
+
+            return res.status(200).json({
+                data: checkLocation.data,
+                success: true,
+                message: `Request Made: ${req.method} from /api/forecast/weather Request from database...`,
+            });
+        };
+
+        console.log('New data fetched from external API...');
+        
+        const weatherRes = await axios.get(`https://api.openweathermap.org/data/2.5/forecast`, {
+            params: {
+                lat,
+                lon,
+                appid: apiKey,
+            },
+        });
+
+        // console.log('Weather API response:', weatherRes.data);
+        const data = weatherRes.data;
+        const newWeatherData = new WeatherForecast({
+            data: data
+        });
+
+        console.log("saved data", newWeatherData);
+
+        await newWeatherData.save(); // save to database
+
+        res.set('Cache-Control', 'no-store');
+        res.status(200).json({
+            data: data,
+            success: true,
+            message: `Request Made: ${req.method} from /api/forecast/weather Request from external API...`,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: 'Error fetching data.',
+            method: req.method,
+        });
+    }
+}
+```
+
+![Image](https://github.com/user-attachments/assets/1775aa6f-9598-45c8-972a-83ab9b68f273)
