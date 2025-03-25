@@ -12,6 +12,23 @@
 
 Repository made to create/develop a small weather app. Using the **_OpenWeatherMap API_**, I will develop a the weather app using the MERN tech stack connecting the data to my API and then from there, storing the data into MongoDB. This app is built using _**npm create vite@latest**_ for the frontend. The new tech stack is designed for simplicity, performance, and ease of content management for future development and maintenance.
 
+## 💯🚀🎯 Major Achievements
+
+### **🎉⛃ Connected backend to frontend; now pulling data from _Atlas_ MongoDB. ⤸**
+
+### ╰┈➤ **🌐 Live dev URL:** [https://hunterstevenshaw-weatherapp.netlify.app/](https://hunterstevenshaw-weatherapp.netlify.app/)
+
+- Using Render _(https://render.com/)_ to host my Express/NodeJS app.
+- Connected _backend_ to _frontend_. 
+- Edited and saved _.env_ variables to make sure all data is secure and used correctly. 
+- Changed and added error handling for _URL/endpoints_.
+- Parsed data correctly and got back a formatted _JSON Response_.
+- Used from _API_. **(External API > Atlas MongoDB database > Own API > Client)**
+- Operation **_fullstack_** application w/ connections and hosting of both the _backend_ and _frontend_. 
+- Gained **_+5,600xp_** and **_+2_** whole levels. I can now train to use the spell **_🔥 Pyroblast_**. 
+
+![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
+
 # ⚛️ **Tech Stack Overview (MERN)** 
 
 [![Tech Stack Icons](https://skillicons.dev/icons?i=js,html,css,react)](https://skillicons.dev)
@@ -460,3 +477,18 @@ module.exports = { // export all funcs
     deleteWeatherById
 }
 ```
+
+### **🎉⛃ Connected backend to frontend; now pulling data from _Atlas_ MongoDB. ⤸**
+
+### ╰┈➤ **🌐 Live dev URL:** [https://hunterstevenshaw-weatherapp.netlify.app/](https://hunterstevenshaw-weatherapp.netlify.app/)
+
+- Using Render _(https://render.com/)_ to host my Express/NodeJS app.
+- Connected _backend_ to _frontend_. 
+- Edited and saved _.env_ variables to make sure all data is secure and used correctly. 
+- Changed and added error handling for _URL/endpoints_.
+- Parsed data correctly and got back a formatted _JSON Response_.
+- Used from _API_. **(External API > Atlas MongoDB database > Own API > Client)**
+- Operation **_fullstack_** application w/ connections and hosting of both the _backend_ and _frontend_. 
+- Gained **_+5,600xp_** and **_+2_** whole levels. I can now train to use the spell **_🔥 Pyroblast_**. 
+
+![Image](https://github.com/user-attachments/assets/e76354ce-bfcf-4196-a00a-598da881fc8d)
