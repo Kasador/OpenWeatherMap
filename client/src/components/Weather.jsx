@@ -3,10 +3,12 @@ import ForecastWeather from './ForecastWeather';
 
 const Weather = () => {
     return (
-        <>
-            <CurrentWeather />
-            <ForecastWeather />
-        </>
+        <main id="mainApp">
+            <section className='ContentSection'>
+                <CurrentWeather />
+                <ForecastWeather />
+            </section>
+        </main>
     )
 }
 

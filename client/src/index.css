@@ -23,6 +23,12 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+/* DIV ROOT Reactjs >>> https://github.com/airbnb/react-outside-click-handler/issues/21 */
+#root, #root > div {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+  }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {

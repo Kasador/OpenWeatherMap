@@ -1,15 +1,38 @@
+/// Colors >>>
+$primary-color: #f7f7f7;
+$accent-color: #0d1117;
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
+  background-color: $accent-color;
+  color: lightgray;
+  // background-image: url('./assets/images/nav-container_background-img.png');
+  // background-color: $accent-color;
+  // background-size: cover;
+  // background-position: center center;
+// https://www.w3schools.com/cssref/css3_pr_background.php
+}
+#MainApp {
+ z-index: 100;
+}
+// .ContentSection {
+//   z-index: 5;
+// }
+#backgroundImg {
+  position: fixed;
   height: 100%;
-  background-color: bisque;
+  width: 500px;
+  top: 0;
+  right: 0;
+  z-index: 0;
 }
 h1 {
   font-size: 1.7rem;
   padding: 1rem;
-  text-align: center;
+  text-align: left;
   font-family:'Courier New', Courier, monospace;
   letter-spacing: 3px;
 }
@@ -39,16 +62,15 @@ section {
   margin-bottom: 1rem;
   padding: 2rem;
   padding-top: 0;
-  text-align: center;
+  text-align: left;
 
   p {
-    color: #333;
+    color: lightgrey;
   }
 }
 
 span {
   font-weight: 600;
-  color: #333;
   text-transform: uppercase;
   text-decoration: underline;
 }
