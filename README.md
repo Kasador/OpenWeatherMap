@@ -31,6 +31,20 @@ Repository made to create/develop a small weather app. Using the **_OpenWeatherM
 
 ![Image](https://github.com/user-attachments/assets/c80bc091-099e-4687-b782-e90dd35c8ab6)
 
+### **🎨🖌️🌦️ Added & Styled Nav Header Graphic. ⤸**
+
+### ╰┈➤ **🤖📑 Reference:** [Reddit Post](https://www.reddit.com/r/identifythisfont/comments/1d80ljo/what_font_or_close_enough_font_is_weather/)
+
+- _https://www.reddit.com/r/identifythisfont/comments/1d80ljo/what_font_or_close_enough_font_is_weather/_
+
+- _Find my solution/code in the **🛠️ Progress** section below. ⤸_
+
+<img src="https://github.com/user-attachments/assets/bd6a8c83-f84b-41e9-bcda-442ad26cf8a6" width="400px" />
+<br><br>
+<img src="https://github.com/user-attachments/assets/f7e4df2b-e0d8-4beb-b867-0ad5702bead8" width="400px" />
+<br><br>
+<img src="https://github.com/user-attachments/assets/0679219f-15e9-4abf-9ba5-875111957613" width="800px" />
+
 # ⚛️ **Tech Stack Overview (MERN)** 
 
 [![Tech Stack Icons](https://skillicons.dev/icons?i=js,html,css,react)](https://skillicons.dev)
@@ -582,3 +596,109 @@ const getForecastWeather = async (req, res) => { // get forecast Weather func
 ```
 
 ![Image](https://github.com/user-attachments/assets/1775aa6f-9598-45c8-972a-83ab9b68f273)
+
+### **🎨🖌️🌦️ Added & Styled Nav Header Graphic. ⤸**
+
+### ╰┈➤ **🤖📑 Reference:** [Reddit Post](https://www.reddit.com/r/identifythisfont/comments/1d80ljo/what_font_or_close_enough_font_is_weather/)
+
+- _https://www.reddit.com/r/identifythisfont/comments/1d80ljo/what_font_or_close_enough_font_is_weather/_
+
+<img src="https://github.com/user-attachments/assets/bd6a8c83-f84b-41e9-bcda-442ad26cf8a6" width="400px" />
+<br><br>
+<img src="https://github.com/user-attachments/assets/f7e4df2b-e0d8-4beb-b867-0ad5702bead8" width="400px" />
+<br><br>
+<img src="https://github.com/user-attachments/assets/0679219f-15e9-4abf-9ba5-875111957613" width="800px" />
+
+### **💡📟 My Solutions/Code. ⤸**
+
+**_client/App.scss_**
+**_client/assets/fonts/_**
+
+```scss
+/* References >>> 
+  1) https://fonts.google.com/
+  2) https://www.w3schools.com/css/css3_fonts.asp
+  3) https://www.reddit.com/r/identifythisfont/comments/1d80ljo/what_font_or_close_enough_font_is_weather/
+  4) https://stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element
+*/ 
+
+// Fonts >>>
+@font-face {
+  font-family: fontWeather;
+  src: url(assets/fonts/ClimateCrisis-Regular-VariableFont_YEAR.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: fontPaint;
+  src: url(assets/fonts/FingerPaint-Regular.ttf);
+  font-weight: bold;
+}
+
+/// Colors >>>
+$primary-color: #f7f7f7;
+$secondary-color: #232931;
+$header-color: lightgray;
+$text-color: whitesmoke;
+$accent-color: #ec6e4c; 
+
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  header {
+    font-weight: bold;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #2b5cab;
+    border-bottom-left-radius: 20px;
+
+    #firstAlertContainer {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+
+      h1 {
+        color: white;
+        font-weight: bold;
+        background-color: #2b5cab;
+        font-family: fontWeather;
+        font-size: 1rem;
+      }
+      span {
+        position: absolute;
+        font-size: 90px;
+        top: -26px;
+        right: 102.8px;
+        text-decoration: none;
+        z-index: 1;
+      }
+      #alertHeader {
+        background-color: #ec6e4c;
+        border-top-left-radius: 18px;
+        transform: translateX(3px);
+        
+      }
+    }
+    hr {
+      display: block;
+      border: 0;
+      border-top: 6px solid white;
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+    }
+    h2 {
+      font-family: fontPaint;
+      font-weight: bold;
+      background-color: #232931;
+      font-size: 1.0rem;
+      text-align: center;
+      padding: 10px;
+      border-bottom-left-radius: 20px;
+    }
+  }
+}
+```
