@@ -1,19 +1,36 @@
+/* References >>> 
+  1) https://fonts.google.com/
+  2) https://www.w3schools.com/css/css3_fonts.asp
+  3) https://www.reddit.com/r/identifythisfont/comments/1d80ljo/what_font_or_close_enough_font_is_weather/
+  4) https://stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element
+*/ 
+
+// Fonts >>>
+@font-face {
+  font-family: fontWeather;
+  src: url(assets/fonts/ClimateCrisis-Regular-VariableFont_YEAR.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: fontPaint;
+  src: url(assets/fonts/FingerPaint-Regular.ttf);
+  font-weight: bold;
+}
+
 /// Colors >>>
 $primary-color: #f7f7f7;
-$accent-color: #0d1117;
+$secondary-color: #232931;
+$header-color: lightgray;
+$text-color: whitesmoke;
+$accent-color: #ec6e4c; 
 
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: $accent-color;
-  color: lightgray;
-  // background-image: url('./assets/images/nav-container_background-img.png');
-  // background-color: $accent-color;
-  // background-size: cover;
-  // background-position: center center;
-// https://www.w3schools.com/cssref/css3_pr_background.php
+  background-color: $secondary-color;
+  color: $text-color;
 }
 #MainApp {
  z-index: 100;
@@ -29,12 +46,73 @@ body {
   right: 0;
   z-index: 0;
 }
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  header {
+    font-weight: bold;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #2b5cab;
+    border-bottom-left-radius: 20px;
+
+    #firstAlertContainer {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+
+      h1 {
+        color: white;
+        font-weight: bold;
+        background-color: #2b5cab;
+        font-family: fontWeather;
+        font-size: 1rem;
+      }
+      span {
+        position: absolute;
+        font-size: 90px;
+        top: -26px;
+        right: 102.8px;
+        text-decoration: none;
+        z-index: 1;
+      }
+      #alertHeader {
+        background-color: #ec6e4c;
+        border-top-left-radius: 18px;
+        transform: translateX(3px);
+        
+      }
+    }
+    hr {
+      display: block;
+      border: 0;
+      border-top: 6px solid white;
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+    }
+    h2 {
+      font-family: fontPaint;
+      font-weight: bold;
+      background-color: #232931;
+      font-size: 1.0rem;
+      text-align: center;
+      padding: 10px;
+      border-bottom-left-radius: 20px;
+    }
+  }
+}
 h1 {
   font-size: 1.7rem;
   padding: 1rem;
   text-align: left;
   font-family:'Courier New', Courier, monospace;
   letter-spacing: 3px;
+  color: $header-color;
 }
 div {
   padding: 1rem;
