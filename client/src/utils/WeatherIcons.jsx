@@ -7,55 +7,55 @@ const WeatherIcons = (name) => {
             name = 'WiNightClear';
             break;
         case "02d": // 02 - few clouds - day
-            name = 'WiDayLightWind';
+            name = 'WiDayCloudy';
             break;
         case "02n": // 02 - night
-            name = 'WiDayLightWind';
+            name = 'WiNightAltCloudy';
             break;
         case "03d": // 03 - scattered clouds - day
-            name = 'WiDayLightWind';
+            name = 'WiCloud';
             break;
         case "03n": // 03 - night
-            name = 'WiDayLightWind';
+            name = 'WiCloud';
             break;
         case "04d": // 04 - broken clouds - day
-            name = 'WiDayLightWind';
+            name = 'WiCloudy';
             break;
         case "04n": // 04 - night
-            name = 'WiDayLightWind';
+            name = 'WiCloudy';
             break;
         case "09d": // 09 - shower rain - day
-            name = 'WiDayLightWind';
+            name = 'WiDayShowers';
             break;
         case "09n": // 09 - night
-            name = 'WiDayLightWind';
+            name = 'WiNightAltShowers';
             break;
         case "10d": // 10 - rain - day
-            name = 'WiDayLightWind';
+            name = 'WiDayRain';
             break;
         case "10n": // 10 - night
-            name = 'WiDayLightWind';
+            name = 'WiNightAltRain';
             break;
         case "11d": // 11 - thunderstorm - day
-            name = 'WiDayLightWind';
+            name = 'WiThunderstorm';
             break;
         case "11n": // 11 - night
-            name = 'WiDayLightWind';
+            name = 'WiThunderstorm';
             break;
         case "13d": // 13 - snow - day
-            name = 'WiDayLightWind';
+            name = 'WiSnowflakeCold';
             break;
         case "13n": // 13 - night
-            name = 'WiDayLightWind';
+            name = 'WiSnowflakeCold';
             break;
         case "50d": // 50 - mist - day
-            name = 'WiDayLightWind';
+            name = 'WiDayFog';
             break;
         case "50n": // 50 - night
-            name = 'WiDayLightWind';
+            name = 'WiNightFog';
             break;
         default:
-            name = "WiDaySunnyOvercast";
+            name = "WiThermometer";
             break;
     }       
 

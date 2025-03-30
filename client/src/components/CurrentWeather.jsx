@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { getCurrentWeather} from '../services/weatherService';
 import WeatherIcons from "../utils/WeatherIcons";
 import * as Icons from "weather-icons-react";
-// import WeatherIcons from "../utils/WeatherIcons";
-// TiWeatherNight
 
-// https://stackoverflow.com/questions/72064944/how-to-display-a-specific-component-icon-based-off-of-props-data-using-a-switch
-// https://stackoverflow.com/questions/74534591/react-how-to-display-react-icons-element-using-fetch-api
-// https://stackoverflow.com/questions/65576629/how-to-render-react-icon-depending-on-string-from-database <<<SOLUTION>>>
-// https://react.dev/reference/react/useEffect
+/* REF:
+    1) https://stackoverflow.com/questions/54596066/how-to-read-console-log-from-a-mounted-component-with-enzyme-and-jest-in-create
+    2) https://stackoverflow.com/questions/72064944/how-to-display-a-specific-component-icon-based-off-of-props-data-using-a-switch
+    3) https://stackoverflow.com/questions/74534591/react-how-to-display-react-icons-element-using-fetch-api
+    4) https://stackoverflow.com/questions/65576629/how-to-render-react-icon-depending-on-string-from-database <<<SOLUTION>>>
+    5) https://react.dev/reference/react/useEffect
+
+*/
 
 const CurrentWeather = () => {
     const [ weather, setWeather ] = useState(null); // store data in state managnment
@@ -23,31 +25,17 @@ const CurrentWeather = () => {
                 const fetchData = await getCurrentWeather(); // now run my function from the services 
                 setWeather(fetchData); // store data into my weather state mana
                 setWeatherIconCode(fetchData.data.weather[0].icon);
-                
-                // const fetchIconData = await WeatherIcons();
-                // setIconName(fetchIconData);
-                
-                // console.log(weatherIcon)
-                // setIconName('WiCelsius')
+           
             } catch (error) { // store error message
                 setError(error);
             } finally { // no longer loading
                 setLoading(false);
-                // setTest(weatherIcon)
-                // handleIconName()
             }
         };
         
-        // setTest(weatherIcon)
-        // setWeather()
-        // console.log(test)
         fetchWeatherData(); // try and fetch the weather data w/ error handling
     }, []); // this runs once the component mounts
 
-
-    // console.log(weatherIcon);
-    // let iconCode;
-  
     const DynamicWeatherIcon  = ({ name }) => {
         // console.log(WeatherIcons(weatherIcon), 'function')
         name = WeatherIcons(weatherIconCode);
@@ -70,7 +58,6 @@ const CurrentWeather = () => {
             <div>
                 <h1>{weather.data.name}</h1>
                 <section>
-                    {/* {getWeatherIcon} */}
                     {/* <img src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} alt="weather icon" /> */}
                     <DynamicWeatherIcon  />
                     <h2>{weather.data.weather[0].description}</h2>
@@ -85,7 +72,3 @@ const CurrentWeather = () => {
 }
 
 export default CurrentWeather;
-
-/* REF:
-    1) https://stackoverflow.com/questions/54596066/how-to-read-console-log-from-a-mounted-component-with-enzyme-and-jest-in-create
-*/
