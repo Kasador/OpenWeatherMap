@@ -30,10 +30,10 @@ const CurrentWeather = () => {
     return (
         <>
             <div>
-                <h1>Weather in... <br></br><span>{weather.data.name}</span></h1>
+                <h1>{weather.data.name}</h1>
                 <section>
                     <img src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`} alt="weather icon" />
-                    <p>{weather.data.weather[0].description}</p>
+                    <h2>{weather.data.weather[0].description}</h2>
                 </section>
                     <p><strong>Temperature:</strong> {Math.round((weather.data.main.temp - 273.15) * 1.8 +32)}&#8457;</p>
                     <p><strong>Feels Like:</strong> {Math.round((weather.data.main.feels_like - 273.15) * 1.8 +32)}&#8457;</p>
