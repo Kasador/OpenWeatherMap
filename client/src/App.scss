@@ -111,7 +111,14 @@ nav {
 
     div {
       width: 250px;
-      
+
+
+      svg {
+        color: gray;
+        font-size: 5rem;
+        padding: 10px;
+        padding-bottom: 20px;
+      }
       h1 {
         font-size: 1.2rem;
         font-family: fontPaint;
@@ -130,10 +137,6 @@ nav {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-
-        img {
-          
-        }
       }
       p {
         color: gray;
