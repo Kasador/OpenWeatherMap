@@ -105,6 +105,13 @@ Currently, two official plugins are available:
 - `npm i axios`
 - `npm i cors`
 - `npm i react-router`
+- `npm i react-icons`
+- `npm i weather-icons-react --save`
+
+### Icon Documentation
+
+- https://najens.github.io/weather-icons-react/
+- https://react-icons.github.io/react-icons/
 
 # 🛠️ Progress
 
@@ -707,3 +714,12 @@ nav {
 ### **🎨🖌️🌦️ Updated frontend UI/UX. ⤸**
 
 ![Image](https://github.com/user-attachments/assets/e1635608-ac5e-4b6b-aeb0-86fa4f41ad5b)
+
+### **🔆Updated weather icon instead of using the APIs icons. ⤸**
+
+![image](https://github.com/user-attachments/assets/6ce30ea0-61dd-4c99-bb02-2ca427c5bb1a)
+
+![image](https://github.com/user-attachments/assets/93306a54-0af8-41a2-9765-6f619c8c926f)
+
+
+
