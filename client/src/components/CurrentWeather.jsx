@@ -9,7 +9,6 @@ import * as Icons from "weather-icons-react";
     3) https://stackoverflow.com/questions/74534591/react-how-to-display-react-icons-element-using-fetch-api
     4) https://stackoverflow.com/questions/65576629/how-to-render-react-icon-depending-on-string-from-database <<<SOLUTION>>>
     5) https://react.dev/reference/react/useEffect
-
 */
 
 const CurrentWeather = () => {
@@ -17,7 +16,6 @@ const CurrentWeather = () => {
     const [ loading, setLoading ] = useState(true); // have it loading until we have data, then false
     const [ error, setError ] = useState(null); // for error messages
     const [ weatherIconCode, setWeatherIconCode] = useState(null);
-    // const [ IconName, setIconName ] = useState(null);
     
     useEffect(() => { // use effect to run this first
         const fetchWeatherData = async () => { // if we are fetching from API we need async to wait for data 
@@ -37,12 +35,9 @@ const CurrentWeather = () => {
     }, []); // this runs once the component mounts
 
     const DynamicWeatherIcon  = ({ name }) => {
-        // console.log(WeatherIcons(weatherIcon), 'function')
         name = WeatherIcons(weatherIconCode);
-        // setIconName(iconName);
         
         const IconComponent = Icons[name];
-        //   console.log(getIconName)
         if (!IconComponent) {
             return <Icons.WiAlien />
         }
