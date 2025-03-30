@@ -1,3 +1,5 @@
+import CurrentWeather from './CurrentWeather';
+
 const Navigation = () => {
     return (
         <nav>
@@ -10,6 +12,9 @@ const Navigation = () => {
                 <hr></hr>
                 <h2>WEATHER</h2>
             </header>
+            <section id="currentWeather">
+                <CurrentWeather />
+            </section>
         </nav>
     )
 }

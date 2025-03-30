@@ -1,4 +1,5 @@
 import './App.scss'
+// import { Routes, Route } from "react-router";
 // Components
 import Weather from './components/Weather';
 import Navigation from './components/Navigation';
@@ -15,4 +16,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
