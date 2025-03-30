@@ -105,6 +105,49 @@ nav {
       border-bottom-left-radius: 20px;
     }
   }
+  #currentWeather {
+    position: absolute;
+    right: 50px;
+
+    div {
+      width: 250px;
+      
+      h1 {
+        font-size: 1.2rem;
+        font-family: fontPaint;
+        color: $secondary-color;
+        width: 300px;
+        font-weight: bold;
+
+      }
+      section {
+        font-size: 2rem;
+        font-family: fontPaint;
+        font-style: oblique;
+        font-weight: 600;
+        color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+          
+        }
+      }
+      p {
+        color: gray;
+
+        strong {
+          font-size: 1.6rem;
+          color: #232931;
+          opacity: .7;
+          // font-family: fontPaint;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
 h1 {
   font-size: 1.7rem;
@@ -141,10 +184,6 @@ section {
   padding: 2rem;
   padding-top: 0;
   text-align: left;
-
-  p {
-    color: lightgrey;
-  }
 }
 
 span {

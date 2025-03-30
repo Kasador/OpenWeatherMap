@@ -104,6 +104,7 @@ Currently, two official plugins are available:
 - `npm i concurrently --save-dev`
 - `npm i axios`
 - `npm i cors`
+- `npm i react-router`
 
 # 🛠️ Progress
 
@@ -702,3 +703,7 @@ nav {
   }
 }
 ```
+
+### **🎨🖌️🌦️ Updated frontend UI/UX. ⤸**
+
+![Image](https://github.com/user-attachments/assets/e1635608-ac5e-4b6b-aeb0-86fa4f41ad5b)

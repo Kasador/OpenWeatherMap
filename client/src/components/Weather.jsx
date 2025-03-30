@@ -1,11 +1,9 @@
-import CurrentWeather from './CurrentWeather';
 import ForecastWeather from './ForecastWeather';
 
 const Weather = () => {
     return (
         <main id="mainApp">
             <section className='ContentSection'>
-                <CurrentWeather />
                 <ForecastWeather />
             </section>
         </main>
