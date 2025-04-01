@@ -1,4 +1,11 @@
 const WeatherIcons = (name) => {
+    const codeMap = new Map();
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map
+    const mapNames = new Map([
+        ['01d', 'WiDaySunny']
+    ]);
+
+    // codeMap.set()
     switch (name) {
         case "01d": // 01 - clear sky - day
             name = 'WiDaySunny';
