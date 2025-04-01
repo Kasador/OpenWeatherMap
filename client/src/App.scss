@@ -120,10 +120,11 @@ nav {
         padding-bottom: 20px;
       }
       h1 {
-        font-size: 1.2rem;
+        font-size: 1.7rem;
         font-family: fontPaint;
         color: $secondary-color;
-        width: 300px;
+        width: auto;
+        text-align: center;
         font-weight: bold;
 
       }
