@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCurrentWeather} from '../services/weatherService';
 import WeatherIcons from "../utils/WeatherIcons";
+import WeatherConversions from "../utils/WeatherConversions";
 import * as Icons from "weather-icons-react";
 
 /* REF:
@@ -57,7 +58,8 @@ const CurrentWeather = () => {
                     <DynamicWeatherIcon  />
                     <h2>{weather.data.weather[0].description}</h2>
                 </section>
-                    <p><strong>Temperature:</strong> {Math.round((weather.data.main.temp - 273.15) * 1.8 +32)}&#8457;</p>
+                    {/* <p><strong>Temperature:</strong> {Math.round((weather.data.main.temp - 273.15) * 1.8 +32)}&#8457;</p> */}
+                    <p><strong>Temperature:</strong> {WeatherConversions(weather.data.main.temp)}&#8457;</p> {/* added conversion func */}
                     <p><strong>Feels Like:</strong> {Math.round((weather.data.main.feels_like - 273.15) * 1.8 +32)}&#8457;</p>
                     <p><strong>Wind Speed:</strong> {Math.round(weather.data.wind.speed * 2.2369)} mph</p>
                     <p><strong>Humidity:</strong> {weather.data.main.humidity}%</p>
