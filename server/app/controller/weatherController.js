@@ -186,19 +186,45 @@ const getWeatherById = async (req, res) => { // get Weather by id func
 
 const getAllWeather = async (req, res) => { // get Weather by id func
     try {
-        console.log('Queries: ', req.query);
-        const data = await Weather.find({}); // make queries strings for get back selective weather and not everything. 
 
-        if (!data) {
+        let query = Weather.find({
+            "data.main.temp": { $gte: 250, $lte: 330 },
+            // "data.sys.country": {$ne: "US"}
+        });
+
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 2;
+        const skip = (page - 1) * limit;
+
+        // http://localhost:3000/api/weather?page=1&limit=15
+        // https://mongoosejs.com/docs/queries.html
+        query.skip(skip).limit(limit).select(
+            "data.coord data.weather data.main data.wind data.sys"
+        );
+
+        // query.select({
+        //     "data.main": { temp: { $gte: 296 - 1, $lte: 296 +1} }
+        // });
+        console.log('Queries: ', query);
+        // let sortBy = asdfasd f
+        // query.select().sort(sortBy)
+
+        const weatherQuery = await query;
+
+        // skip(skip).limit(limit);
+        console.log(weatherQuery);
+
+        // const data = await Weather.find({}); // make queries strings for get back selective weather and not everything. 
+
+        if (!weatherQuery) {
             return res.status(404).json({
                 success: false,
                 message: "Weather data not found.",
-                id
             });
         }
 
         res.status(200).json({
-            data,
+            data: weatherQuery,
             success: true,
             message: `Request Made: ${req.method} from /api/weather endpoint.`
         });
