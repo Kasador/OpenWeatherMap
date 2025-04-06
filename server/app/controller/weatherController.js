@@ -190,7 +190,7 @@ const getAllWeather = async (req, res) => { // get Weather by id func
         let query = Weather.find({
             "data.main.temp": { $gte: 250, $lte: 330 },
             // "data.sys.country": {$ne: "US"}
-        });
+        }).sort({ "data.main.temp": 'asc'});
 
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 2;
